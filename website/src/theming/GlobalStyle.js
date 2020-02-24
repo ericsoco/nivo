@@ -70,9 +70,12 @@ export default isCapturing => create`
     }
 
     code,
-    pre,
-    svg text {
+    pre {
         font-family: ${({ theme }) => theme.fontFamilyMono};
+    }
+
+    svg text {
+        font-family: ${({ theme }) => theme.fontFamilyLabel || theme.fontFamilyMono};
     }
 
     th {

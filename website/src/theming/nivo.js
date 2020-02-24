@@ -6,7 +6,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-export default {
+const nivoChartsTheme = {
     light: {
         background: '#ffffff',
         axis: {
@@ -155,3 +155,27 @@ export default {
         },
     },
 }
+
+const baseChartsOverrides = {
+    ...nivoChartsTheme,
+    fontFamily: `UberMoveText-Regular, sans-serif`,
+    fontFamilyLabel: `UberMoveText-Regular, sans-serif`,
+    textColor: '#000000',
+    light: {
+        ...nivoChartsTheme.light,
+        fontFamily: `UberMoveText-Regular, sans-serif`,
+        textColor: '#000000',
+
+        // Gridlines (not sure why this can't be
+        // applied in ComponentTemplate overrides)
+        grid: {
+            line: {
+                stroke: '#757575',
+                strokeDasharray: '.1 6',
+                strokeLinecap: 'round',
+            },
+        },
+    },
+}
+
+export default baseChartsOverrides

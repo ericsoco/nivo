@@ -17,7 +17,7 @@ const dimensions = {
     miniNavItemSize: 56,
 }
 
-export default {
+const nivoTheme = {
     light: {
         id: 'light',
         colors: {
@@ -59,6 +59,8 @@ export default {
 
         nivo: nivo.light,
         highlight: highlight.light,
+
+        ...baseChartsOverrides,
     },
     dark: {
         id: 'dark',
@@ -102,3 +104,23 @@ export default {
         highlight: highlight.dark,
     },
 }
+
+// Website theme overrides
+const baseChartsOverrides = {
+    ...nivoTheme,
+    light: {
+        ...nivoTheme.light,
+        colors: {
+            ...nivoTheme.light.colors,
+            background: '#ffffff',
+            titleText: '#5b91f4',
+            link: '#5b91f4',
+            accent: '#5b91f4',
+            gradientColor0: '#5b91f4',
+            gradientColor1: '#5b91f4',
+        },
+        fontFamily: `UberMoveText-Regular, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'`,
+    },
+}
+
+export default baseChartsOverrides

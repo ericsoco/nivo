@@ -21,6 +21,76 @@ import ActionsLogger, { useActionsLogger } from './ActionsLogger'
 import ComponentSettings from './ComponentSettings'
 import Stories from './Stories'
 
+/**
+ * Inject Base Charts per-chart styles/settings
+ * NOTE: Applicable and pre-defined properties vary by chart type
+ */
+function applyBaseChartsStyles(properties) {
+    return {
+        ...properties,
+        margin: {
+            ...properties.margin,
+            top: 100,
+        },
+        colors: [
+            // Primary color palette
+            '#5b91f4',
+            '#3ccece',
+            '#ffc043',
+            '#e28454',
+            '#174291',
+            // First five of Secondary color palette
+            '#ff5b8c',
+            '#abf0ff',
+            '#6c78d3',
+            '#6a126a',
+            '#f7df90',
+        ],
+
+        // Disable SVG pattern fills
+        ...{
+            defs: [],
+            fill: [],
+        },
+
+        enableGridX: false,
+
+        // Axes
+        axisBottom: {
+            ...properties.axisBottom,
+            legend: '',
+            tickPadding: 10,
+            tickSize: 0,
+        },
+        axisLeft: {
+            ...properties.axisLeft,
+            legend: '',
+            tickPadding: 10,
+            tickValues: 5,
+        },
+
+        // Legends
+        ...(properties.legends && properties.legends[0]
+            ? {
+                  legends: [
+                      {
+                          ...properties.legends[0],
+                          anchor: 'top-left',
+                          direction: 'row',
+                          translateX: 0,
+                          translateY: -50,
+                          symbolSize: 12,
+                          symbolShape: 'circle',
+                      },
+                  ],
+              }
+            : {}),
+
+        // Line chart-specific
+        enablePoints: false,
+    }
+}
+
 const ComponentTemplate = ({
     name,
     meta,
@@ -55,6 +125,8 @@ const ComponentTemplate = ({
     if (propertiesMapper !== undefined) {
         mappedProperties = propertiesMapper(settings, data)
     }
+
+    mappedProperties = applyBaseChartsStyles(mappedProperties)
 
     let codeProperties = mappedProperties
     if (codePropertiesMapper !== undefined) {
